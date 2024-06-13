@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.example.demo.Car;
+import com.example.demo.Game;
 import com.example.demo.component.Bean3;
 import com.example.demo.component.ImageUtill;
 

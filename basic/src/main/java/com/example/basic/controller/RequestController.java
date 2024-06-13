@@ -7,12 +7,16 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.basic.model.Emp;
+import com.example.basic.model.Json;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -28,7 +32,7 @@ public class RequestController {
     int pageNum = Integer.parseInt(page) * 5 - 5;
     String sql = "select * from emp" +
     // " where ename like conat ('%', 'ename', '%')"+
-        " where ename like concat('%', '" + ename + "', '%'')" +
+        " where ename like concat('%', '" + ename + "', '%')" +
         " limit " + pageNum + ", 5";
     return jt.queryForList(sql);
   }
@@ -40,7 +44,7 @@ public class RequestController {
     int pageNum = Integer.parseInt(emp.getPage()) * 5 - 5;
     String sql = "select * from emp" +
     // " where ename like conat ('%', 'ename', '%')"+
-        " where ename like concat('%', '" + emp.getEname() + "', '%'')" +
+        " where ename like concat('%', '" + emp.getEname() + "', '%')" +
         " limit " + pageNum + ", 5";
     return jt.queryForList(sql);
   }
@@ -70,4 +74,33 @@ public class RequestController {
     String pageNum = request.getParameter("pageNum");
     return name + ", " + pageNum;
   }
-}
+  @CrossOrigin
+  @GetMapping("req/get")
+  public Map<String, String> reqGet(@RequestParam Map<String, String> map){
+    return map;
+   } 
+  @CrossOrigin
+  @PostMapping("req/post")
+  public Map<String, String> reqPost(@RequestParam Map<String, String> map){
+    return map;
+   } 
+  @CrossOrigin
+  @PostMapping("req/json")
+  public Json reqJson(@RequestBody Json json){
+    return json;
+   } 
+
+   @GetMapping("req/data")
+   public Map<String, String> reqData(
+      @RequestParam Map<String, String> map
+    ){
+     return map;
+    } 
+
+   @GetMapping("req/titanic")
+   public List<Map<String, Object>> titanic(){
+     String sql = "select * from titanic";
+     return jt.queryForList(sql);
+   }
+ 
+  }

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MethodController {
-  @PostMapping("req/post")
+  @PostMapping("req/post2")
   public String post() {
     return "POST";
   }
